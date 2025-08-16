@@ -192,3 +192,7 @@ select:focus {
     text-align: center;
     margin: 1rem;
 }
+
+.muted{
+    color: var(--muted);
+}
