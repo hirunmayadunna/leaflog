@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" , initial-scale="1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <span aria-hidden="true">📚</span> -->
     <title>LeafLog - Reading Log</title>
     <meta name="description" content="Track books you want to read, are reading, and have finished.">
     <link rel="stylesheet" href="styles.css" />
@@ -92,18 +93,24 @@
             </header>
 
             <form id="addForm" class="form" novalidate>
-                <label class="field">
-                    <span class="field__label">Title <span aria-hidden="true">*</span></span>
-                    <input id="titleInput" name="title" required placeholder="e.g., Atomic Habits" />
+                <label class="field" id="titleField">
+                    <span class="field__label field_label">Title <span aria-hidden="true">*</span></span>
+                    <input id="titleInput" name="title" required placeholder="e.g., Atomic Habits"
+                        aria-describedby="titleHelp titleError" />
+                    <small id="titleHelp" class="help">Max 120 characters.</small>
+                    <small id="titleError" class="error" hidden></small>
+                </label>
+
+                <label class="field" id="authorField">
+                    <span class="field__label field_label">Author <span aria-hidden="true">*</span></span>
+                    <input id="authorInput" name="author" required placeholder="e.g., James Clear"
+                        aria-describedby="authorHelp authorError" />
+                    <small id="authorHelp" class="help">Max 120 characters.</small>
+                    <small id="authorError" class="error" hidden></small>
                 </label>
 
                 <label class="field">
-                    <span class="field__label">Author <span aria-hidden="true">*</span></span>
-                    <input id="authorInput" name="author" required placeholder="e.g., James Clear" />
-                </label>
-
-                <label class="field">
-                    <span class="field__label">Status</span>
+                    <span class="field__label field_label">Status</span>
                     <select id="statusInput" name="status">
                         <option value="to-read">To-read</option>
                         <option value="reading">Reading</option>
@@ -118,9 +125,11 @@
                     <button type="submit" class="btn primary">Save Book</button>
                 </div>
             </form>
+
+
         </div>
     </div>
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
 </body>
 
 </html>
