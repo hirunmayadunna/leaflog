@@ -68,6 +68,23 @@ body {
 
 .site-header{
     background: rgba(17,20,24,.7);
-    background-filter: blur(6px) ;
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.header_inner{
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+    padding: .9rem 0;
+}
+.site_title{
+    font-size: 1.25rem;
+    margin: 0;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
