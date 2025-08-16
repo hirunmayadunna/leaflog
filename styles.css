@@ -84,7 +84,7 @@ body {
     padding: .9rem 0;
 }
 
-.site_title {
+.site-title {
     font-size: 1.25rem;
     margin: 0;
     display: flex;
@@ -312,4 +312,24 @@ select:focus {
 .card__actions .btn {
     padding: .45rem .7rem;
     font-size: .9rem;
+}
+
+/* Validation */
+.field--error .field_label {
+    color: #ffb4b4;
+}
+
+.input--error {
+    border-color: #ff6b6b !important;
+    box-shadow: 0 0 0 3px color-mix(in srgb, #ff6b6b 35%, transparent) !important;
+}
+
+.help {
+    font-size: .85rem;
+    color: var(--muted);
+}
+
+.error {
+    font-size: .85rem;
+    color: #ffb4b4;
 }
