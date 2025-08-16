@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" , initial-scale="1" />
+    <title>LeafLog - Reading Log</title>
+    <meta name="description" content="Track books you want to read, are reading, and have finished.">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <!-- Skip to main content for keyboard/screen readers -->
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header" role="banner">
+        <div class="container header_inner">
+            <h1 class="site-title" aria-label="Leaflog Reading Log">
+                <span arial-hidden="true">📚</span>LeafLog
+            </h1>
+            <nav aria-label="header">
+                <ul class="nav">
+                    <li><a href="#/all">All</a></li>
+                    <li><a href="#/stats">Stats</a></li>
+                    <li><a class="muted" href="https://github.com/hirunmayadunna/leaflog" target="_blank"
+                            rel="noopener">GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" class="site-main" tabindex="-1">
+        <!-- Controls bar -->
+        <section class="controls container" aria-labelledby="controls-heading">
+            <h2 id="controls-heading" class="sr-only">Controls</h2>
+
+            <div class="controls_row">
+                <label class="field">
+                    <span class="field_label">Search Title/Author</span>
+                    <input id="search" type="search" placeholder="e.g., Atomic Habits" />
+                </label>
+
+                <label class="field">
+                    <span class="field_label">Status</span>
+                    <select id="statusFilter" aria-label="Filter by status">
+                        <option value="all">All</option>
+                        <option value="to-read">To-read</option>
+                        <option value="reading">Reading</option>
+                        <option value="done">Done</option>
+                    </select>
+                </label>
+
+                <button id="addBookBtn" class="btn primary" type="button" aria-haspopup="dialog"
+                    aria-controls="addDialog">+ Add Book</button>
+            </div>
+        </section>
+
+        <!-- Results / Empty state -->
+        <section class="container" aria-labelledby="list-heading">
+            <h2 id="list-heading" class="sr-only">Book List</h2>
+            <div id="bookGrid" class="grid">
+                <!-- Cards will be injected here -->
+            </div>
+            <p id="emptyState" class="empty muted" role="status" aria-live="polite">
+                No books yet- use "Add Book" to create your entry.
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <small>© Hirun Mayadunna ·</small>
+        </div>
+    </footer>
+
+    <!-- Minimal Keyboard help Target -->
+    <section id="keyboard-help" class="sr-only" aria-label="Keyboard-help">
+        Tab/Shift+Tab move, Enter to activate, Esc to close dialogs.
+    </section>
+
+
+
+    <!-- Add Book Modal (in-page dialog) -->
+    <div id="addDialog" class="modal" role="dialog" aria-modal="true" aria-labelledby="addDialogTitle" hidden>
+        <div class="modal__backdrop" data-close></div>
+        <div class="modal__panel" role="document">
+            <header class="modal__header">
+                <h2 id="addDialogTitle">Add a Book</h2>
+                <button class="modal__close btn" type="button" aria-label="Close add book" data-close>✕</button>
+            </header>
+
+            <form id="addForm" class="form" novalidate>
+                <label class="field">
+                    <span class="field__label">Title <span aria-hidden="true">*</span></span>
+                    <input id="titleInput" name="title" required placeholder="e.g., Atomic Habits" />
+                </label>
+
+                <label class="field">
+                    <span class="field__label">Author <span aria-hidden="true">*</span></span>
+                    <input id="authorInput" name="author" required placeholder="e.g., James Clear" />
+                </label>
+
+                <label class="field">
+                    <span class="field__label">Status</span>
+                    <select id="statusInput" name="status">
+                        <option value="to-read">To-read</option>
+                        <option value="reading">Reading</option>
+                        <option value="done">Done</option>
+                    </select>
+                </label>
+
+                <p id="addError" class="form__error" role="alert" aria-live="polite" hidden></p>
+
+                <div class="modal__actions">
+                    <button type="button" class="btn" data-close>Cancel</button>
+                    <button type="submit" class="btn primary">Save Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
