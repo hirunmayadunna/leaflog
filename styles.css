@@ -301,3 +301,15 @@ select:focus {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
 }
+
+/* Card actions row */
+.card__actions {
+    display: flex;
+    gap: .5rem;
+    margin-top: .5rem;
+}
+
+.card__actions .btn {
+    padding: .45rem .7rem;
+    font-size: .9rem;
+}
