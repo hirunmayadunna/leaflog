@@ -173,6 +173,7 @@ select:focus {
 .btn.primary {
     background: linear-gradient(180deg, var(--brand), var(--brand-900));
     border-color: color-mix(in srgb, var(--brand) 45%, #000);
+    width: 400px;
 }
 
 .btn:hover {
@@ -332,4 +333,42 @@ select:focus {
 .error {
     font-size: .85rem;
     color: #ffb4b4;
+}
+
+input[type="search"],
+select {
+    width: 100%;
+    padding: .65rem .75rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #0b0e12;
+    color: var(--text);
+    outline: none;
+}
+
+.chip--to-read {
+    background-color: #2563eb;
+    color: #fff;
+    border: 1px solid #bfdbfe;
+}
+
+.chip--reading {
+    background-color: #ebcc4f;
+    color: #000000;
+    border: 1px solid #4e1305;
+}
+
+.chip--done {
+    background-color: #059669;
+    color: #000000;
+    border: 1px solid #a7f3d0;
+}
+
+.nav .brand img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin-right: 10px;
 }
