@@ -26,6 +26,7 @@
     let editingId = null;
 
     // ----- DOM -----
+    const sortSelect = document.getElementById("sortSelect");
     const searchInput = document.getElementById("search");
     const statusSelect = document.getElementById("statusFilter");
     const addBtn = document.getElementById("addBookBtn");
@@ -60,10 +61,49 @@
             .replace(/'/g, "&#039;");
     }
 
+    // ----- Sort helpers (now INSIDE the IIFE) -----
+    const STATUS_ORDER = { "to-read": 0, "reading": 1, "done": 2 };
+
+    function getFilters() {
+        return {
+            q: searchInput.value.trim().toLowerCase(),
+            status: statusSelect.value,
+            sort: sortSelect ? sortSelect.value : "recent"
+        };
+    }
+
+    function compareBooks(a, b, sort) {
+        const ta = a.title.toLowerCase(), tb = b.title.toLowerCase();
+        const aa = a.author.toLowerCase(), ab = b.author.toLowerCase();
+
+        if (sort === "title") {
+            if (ta !== tb) return ta < tb ? -1 : 1;
+            if (aa !== ab) return aa < ab ? -1 : 1;
+            return (a.createdAt || a.updatedAt || 0) - (b.createdAt || b.updatedAt || 0);
+        }
+        if (sort === "author") {
+            if (aa !== ab) return aa < ab ? -1 : 1;
+            if (ta !== tb) return ta < tb ? -1 : 1;
+            return (a.createdAt || a.updatedAt || 0) - (b.createdAt || b.updatedAt || 0);
+        }
+        if (sort === "status") {
+            const sa = STATUS_ORDER[a.status] ?? 99;
+            const sb = STATUS_ORDER[b.status] ?? 99;
+            if (sa !== sb) return sa - sb;
+            if (ta !== tb) return ta < tb ? -1 : 1;
+            return (a.createdAt || a.updatedAt || 0) - (b.createdAt || b.updatedAt || 0);
+        }
+        // default: recent (newest first)
+        const ca = a.createdAt || a.updatedAt || 0;
+        const cb = b.createdAt || b.updatedAt || 0;
+        if (ca !== cb) return cb - ca;
+        if (ta !== tb) return ta < tb ? -1 : 1;
+        return aa < ab ? -1 : (aa > ab ? 1 : 0);
+    }
+
     // ----- Rendering -----
     function render() {
-        const q = searchInput.value.trim().toLowerCase();
-        const status = statusSelect.value;
+        const { q, status, sort } = getFilters();
 
         const filtered = books.filter(b => {
             const textMatch = b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q);
@@ -71,8 +111,10 @@
             return textMatch && statusMatch;
         });
 
-        grid.innerHTML = filtered.map(b => cardHTML(b)).join("");
-        empty.hidden = filtered.length > 0;
+        const sorted = filtered.slice().sort((a, b) => compareBooks(a, b, sort));
+
+        grid.innerHTML = sorted.map(b => cardHTML(b)).join("");
+        empty.hidden = sorted.length > 0;
     }
 
     function cardHTML(b) {
@@ -81,12 +123,17 @@
                 : b.status === "reading" ? "chip chip--reading"
                     : "chip chip--to-read";
 
+        const statusLabel =
+            b.status === "done" ? "Done"
+                : b.status === "reading" ? "Reading"
+                    : "To-Read";   // notice capital + hyphen styled
+
         const safeTitle = escapeHTML(b.title);
         return `
       <article class="card" data-id="${b.id}">
         <h3 class="card__title">${safeTitle}</h3>
         <p class="card__meta">by ${escapeHTML(b.author)}</p>
-        <span class="${chipClass}">${b.status}</span>
+        <span class="${chipClass}">${statusLabel}</span>
         <div class="card__actions">
           <button class="btn" type="button" data-action="edit" aria-label="Edit ${safeTitle}">Edit</button>
           <button class="btn" type="button" data-action="delete" aria-label="Delete ${safeTitle}">Delete</button>
@@ -94,6 +141,7 @@
       </article>
     `;
     }
+
 
     // ----- Modal control -----
     let lastFocused = null;
@@ -192,7 +240,6 @@
 
     // ----- Handlers -----
     addBtn.addEventListener("click", openAddDialog);
-
     addForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const asEdit = editingId !== null;
@@ -246,6 +293,7 @@
 
     searchInput.addEventListener("input", render);
     statusSelect.addEventListener("change", render);
+    if (sortSelect) sortSelect.addEventListener("change", render); // <-- add this
 
     // ----- Initial render -----
     render();

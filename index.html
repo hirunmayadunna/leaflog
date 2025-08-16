@@ -16,14 +16,20 @@
     <header class="site-header" role="banner">
         <div class="container header_inner">
             <h1 class="site-title" aria-label="Leaflog Reading Log">
-                <span arial-hidden="true">📚</span>LeafLog
+                <span aria-hidden="true"><img class="mlogo" src="assets/Mlogo2.png" alt="LeafLog logo"></span>
+                LeafLog
             </h1>
             <nav aria-label="header">
                 <ul class="nav">
-                    <li><a href="#/all">All</a></li>
-                    <li><a href="#/stats">Stats</a></li>
+                    <li class="brand">
+                        <a href="https://github.com/hirunmayadunna" aria-label="LeafLog Home">
+                            <img src="assets/logo.png" alt="LeafLog logo">
+                        </a>
+                    </li>
+
+                    <!-- <li><a href="#/stats">Stats</a></li>
                     <li><a class="muted" href="https://github.com/hirunmayadunna/leaflog" target="_blank"
-                            rel="noopener">GitHub</a></li>
+                            rel="noopener">GitHub</a></li> -->
                 </ul>
             </nav>
         </div>
@@ -53,8 +59,30 @@
                     </select>
                 </label>
 
+                <label class="field">
+                    <span class="field_label">Sort</span>
+                    <select id="sortSelect" aria-label="Sort books">
+                        <option value="recent">Recently Added</option>
+                        <option value="title">Title (A→Z)</option>
+                        <option value="author">Author (A→Z)</option>
+                        <option value="status">Status (To-read → Reading → Done)</option>
+                    </select>
+                </label>
+
+
                 <button id="addBookBtn" class="btn primary" type="button" aria-haspopup="dialog"
-                    aria-controls="addDialog">+ Add Book</button>
+                    aria-controls="addDialog">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-book">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                        <path d="M3 6l0 13" />
+                        <path d="M12 6l0 13" />
+                        <path d="M21 6l0 13" />
+                    </svg>
+                    <b>+ Add Book</b></button>
             </div>
         </section>
 
@@ -72,7 +100,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            <small>© Hirun Mayadunna ·</small>
+            <small>© Hirun Mayadunna · All rights reserved.</small>
         </div>
     </footer>
 
