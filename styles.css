@@ -130,7 +130,7 @@ body {
 
 .controls_row {
     display: grid;
-    grid-template-rows: 1fr 180px auto;
+    grid-template-columns: 1fr 180px auto;
     gap: .75rem;
 }
 
@@ -181,18 +181,123 @@ select:focus {
 
 /* Grid & Empty State */
 
-.grid{
+.grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: .9rem;
     margin-top: 1rem;
     min-height: 80px;
 }
-.empty{
+
+.empty {
     text-align: center;
     margin: 1rem;
 }
 
-.muted{
+.muted {
     color: var(--muted);
+}
+
+/* ========== Cards ========== */
+.card {
+    background: #0b0e12;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: .9rem;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    box-shadow: var(--shadow);
+}
+
+.card__title {
+    font-weight: 600;
+    margin: 0;
+}
+
+.card__meta {
+    font-size: .9rem;
+    color: var(--muted);
+}
+
+.chip {
+    display: inline-block;
+    font-size: .75rem;
+    padding: .2rem .5rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+}
+
+.chip--to-read {
+    background: #0d1a12;
+    color: #c4f1cf;
+}
+
+.chip--reading {
+    background: #12151d;
+    color: #c9d9ff;
+}
+
+.chip--done {
+    background: #111511;
+    color: #bfe8c1;
+}
+
+/* ========== Modal Dialog ========== */
+.modal[hidden] {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: grid;
+    place-items: center;
+}
+
+.modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .55);
+}
+
+.modal__panel {
+    position: relative;
+    width: min(560px, 92vw);
+    background: #0b0e12;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: .5rem;
+}
+
+.modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: .5rem;
+    margin-top: .8rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.form__error {
+    color: #ffb4b4;
+}
+
+/* Focus outline for modal trap */
+.modal :focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
 }

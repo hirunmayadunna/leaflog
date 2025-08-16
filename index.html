@@ -47,10 +47,10 @@
                         <option value="reading">Reading</option>
                         <option value="done">Done</option>
                     </select>
-
-                    <button id="addBookBtn" class="btn primary" type="button" aria-haspopup="dialog"
-                        aria-controls="addDialog">+ Add Book</button>
                 </label>
+
+                <button id="addBookBtn" class="btn primary" type="button" aria-haspopup="dialog"
+                    aria-controls="addDialog">+ Add Book</button>
             </div>
         </section>
 
@@ -77,8 +77,47 @@
         Tab/Shift+Tab move, Enter to activate, Esc to close dialogs.
     </section>
 
-    <script src="app.js"></script>
 
+
+    <!-- Add Book Modal (in-page dialog) -->
+    <div id="addDialog" class="modal" role="dialog" aria-modal="true" aria-labelledby="addDialogTitle" hidden>
+        <div class="modal__backdrop" data-close></div>
+        <div class="modal__panel" role="document">
+            <header class="modal__header">
+                <h2 id="addDialogTitle">Add a Book</h2>
+                <button class="modal__close btn" type="button" aria-label="Close add book" data-close>✕</button>
+            </header>
+
+            <form id="addForm" class="form" novalidate>
+                <label class="field">
+                    <span class="field__label">Title <span aria-hidden="true">*</span></span>
+                    <input id="titleInput" name="title" required placeholder="e.g., Atomic Habits" />
+                </label>
+
+                <label class="field">
+                    <span class="field__label">Author <span aria-hidden="true">*</span></span>
+                    <input id="authorInput" name="author" required placeholder="e.g., James Clear" />
+                </label>
+
+                <label class="field">
+                    <span class="field__label">Status</span>
+                    <select id="statusInput" name="status">
+                        <option value="to-read">To-read</option>
+                        <option value="reading">Reading</option>
+                        <option value="done">Done</option>
+                    </select>
+                </label>
+
+                <p id="addError" class="form__error" role="alert" aria-live="polite" hidden></p>
+
+                <div class="modal__actions">
+                    <button type="button" class="btn" data-close>Cancel</button>
+                    <button type="submit" class="btn primary">Save Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 
 </html>
